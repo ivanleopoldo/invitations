@@ -1,8 +1,25 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { db } from "@/lib/instantdb";
 import { motion } from "motion/react";
 
 export default function InviteLink() {
+  const { data, isLoading, error } = db.useQuery({ invited: {} });
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center w-full h-svh">
+        Loading...
+      </div>
+    );
+  }
+
+  if (error) {
+    alert(error.message);
+  }
+
+  console.log(data.invited);
+
   return (
     <div>
       <div className="relative flex md:flex-row flex-col w-full md:h-svh">
