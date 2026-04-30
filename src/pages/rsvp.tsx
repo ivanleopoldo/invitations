@@ -1,115 +1,44 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { motion } from "motion/react";
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+  FieldSet,
+} from "@/components/ui/field";
 
 export default function RSVP() {
-  const [attendance, setAttendance] = useState<"yes" | "no" | null>(null);
-  const [form, setForm] = useState({
-    name: "",
-    guests: 1,
-    message: "",
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const payload = {
-      ...form,
-      attendance,
-    };
-
-    console.log("RSVP Submitted:", payload);
-
-    // TODO: send to Supabase
-  };
-
+  const [max, setMax] = useState<number>(0);
   return (
-    <div className="flex justify-center items-center bg-neutral-50 px-4 py-10 w-full min-h-screen">
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-6 bg-white shadow-lg p-8 rounded-3xl w-full max-w-md"
-      >
-        <div className="text-center">
-          <h2 className="font-handwritten font-semibold text-2xl">RSVP</h2>
-          <p className="mt-1 text-neutral-500 text-sm">
-            Please let us know if you can attend
-          </p>
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <label className="font-medium text-sm">Family Name</label>
-          <input
-            type="text"
-            required
-            value={form.name}
-            onChange={(e) => setForm({ ...form, name: e.target.value })}
-            className="px-4 py-3 border rounded-xl outline-none focus:ring-2 focus:ring-black/20"
-            placeholder="Enter your name"
-          />
-        </div>
-
-        <div className="flex flex-col gap-3">
-          <label className="font-medium text-sm">Will you attend?</label>
-
-          <div className="flex gap-3">
-            <button
-              type="button"
-              onClick={() => setAttendance("yes")}
-              className={`flex-1 py-3 rounded-xl border ${
-                attendance === "yes" ? "bg-black text-white" : "bg-white"
-              }`}
-            >
-              Accept
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setAttendance("no")}
-              className={`flex-1 py-3 rounded-xl border ${
-                attendance === "no" ? "bg-black text-white" : "bg-white"
-              }`}
-            >
-              Decline
-            </button>
-          </div>
-        </div>
-
-        {attendance === "yes" && (
-          <div className="flex flex-col gap-2">
-            <label className="font-medium text-sm">Number of Guests</label>
-            <input
-              type="number"
-              min={1}
-              value={form.guests}
-              onChange={(e) =>
-                setForm({
-                  ...form,
-                  guests: Number(e.target.value),
-                })
-              }
-              className="px-4 py-3 border rounded-xl outline-none focus:ring-2 focus:ring-black/20"
-            />
-          </div>
-        )}
-
-        <div className="flex flex-col gap-2">
-          <label className="font-medium text-sm">Message (optional)</label>
-          <textarea
-            value={form.message}
-            onChange={(e) => setForm({ ...form, message: e.target.value })}
-            className="px-4 py-3 border rounded-xl outline-none focus:ring-2 focus:ring-black/20"
-            rows={3}
-            placeholder="Leave a message..."
-          />
-        </div>
-
-        <Button
-          type="submit"
-          className="py-5 rounded-2xl w-full text-base"
-          disabled={!attendance || !form.name}
-        >
-          Proceed
-        </Button>
-      </form>
+    <div className="flex flex-col justify-center items-center gap-8 w-full h-svh">
+      <div className="flex flex-col justify-center">
+        <p className="font-handwritten font-black text-4xl">Hello,</p>
+        <p className="ml-12 font-handwritten text-3xl md:text-4xl">
+          Mrs. & Ms. Leopoldo
+        </p>
+        <p className="text-xl text-center">
+          We have reserved {max} seats for you.
+        </p>
+      </div>
+      <FieldSet className="w-3/4 md:w-1/4">
+        <FieldGroup>
+          <Field>
+            <FieldLabel htmlFor="number">How many are going?</FieldLabel>
+            <Input id="number" type="number" min={0} max={max} />
+          </Field>
+        </FieldGroup>
+        <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+          <Button className="w-full">Confirm</Button>
+        </motion.button>
+      </FieldSet>
+      <div>
+        <p className="text-muted-foreground">
+          You can revisit this website if you've changed your mind.
+        </p>
+      </div>
     </div>
   );
 }

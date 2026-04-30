@@ -3,76 +3,80 @@ import { Separator } from "@/components/ui/separator";
 import { db } from "@/lib/instantdb";
 import { motion } from "motion/react";
 import { useState } from "react";
+import { NavLink, useNavigate } from "react-router";
 
 export default function InviteLink() {
+  const navigate = useNavigate();
   return (
     <div>
       <div className="relative flex md:flex-row flex-col w-full md:h-svh">
-        <div className="relative flex md:flex-[1.5]">
+        <section className="relative flex md:flex-[1.5] h-[50vh] md:h-full">
           <img
-            src={"together.jpg"}
+            src={"final.jpg"}
             className="invert-20 sepia-50 w-full object-cover object-top"
           />
           <div className="bottom-0 absolute">
             <div className="relative flex flex-row md:flex-col">
-              <p className="font-major font-bold text-background md:text-[12rem]/60 text-7xl/35 motion-preset-slide-up">
+              <p className="font-major font-bold text-secondary md:text-[12rem]/60 text-7xl/35 motion-preset-slide-up">
                 06
               </p>
-              <p className="font-major font-bold text-background md:text-[12rem]/15 text-7xl/35 motion-delay-300 motion-preset-slide-up">
+              <p className="font-major font-bold text-secondary md:text-[12rem]/15 text-7xl/35 motion-delay-300 motion-preset-slide-up">
                 11
               </p>
-              <p className="font-major font-bold text-background md:text-[12rem]/60 text-7xl/35 motion-delay-600 motion-preset-slide-up-sm">
+              <p className="font-major font-bold text-secondary md:text-[12rem]/60 text-7xl/35 motion-delay-600 motion-preset-slide-up-sm">
                 26
               </p>
             </div>
           </div>
-        </div>
-        <motion.div className="flex flex-col md:flex-1 justify-center items-center gap-8 md:p-18 md:h-svh">
-          <div>
-            <p className="font-major text-xl md:text-4xl text-center">
-              In honor of celebrating 25 years of their marriage
-            </p>
-          </div>
-          <div className="flex flex-row gap-8 mt-8 -rotate-12">
+        </section>
+        <section className="flex flex-col md:flex-1 justify-center items-center gap-8 md:p-18 md:h-full min-h-[50vh]">
+          <div className="flex flex-col justify-center items-center gap-8">
             <div>
-              <p className="font-handwritten font-bold text-7xl">Hannah</p>
-              <p className="ml-32 font-handwritten font-bold text-7xl">Leo</p>
-            </div>
-            <p className="mt-12 font-handwritten text-7xl">+</p>
-          </div>
-          <div className="flex flex-col justify-center gap-2 font-light text-center">
-            <p className="font-italiana md:text-2xl text-center">
-              Invite you to join them and their children as they renew their
-              vows
-            </p>
-            <div className="flex flex-col gap-2">
-              <p className="font-light">
-                ON THURSDAY, THREE O'CLOCK IN THE AFTERNOON
+              <p className="font-major md:text-xl text-center">
+                In honor of celebrating{" "}
+                <span className="bg-primary px-2 py-1 font-bold text-white">
+                  25 years
+                </span>{" "}
+                of their marriage
               </p>
-              <button className="self-center bg-accent px-4 py-2 rounded-full w-fit">
-                <p>📍 Archbishop's Palace</p>
-              </button>
-              <p>Dinner, singing and dancing will follow at</p>
-              <button className="self-center bg-accent px-4 py-2 rounded-full w-fit">
-                <p>📍 4th Street, Beverly Hills</p>
-              </button>
             </div>
+            <div className="-rotate-12">
+              <p className="font-cursive text-7xl">Hannah</p>
+              <p className="ml-32 font-cursive text-7xl">& Leo</p>
+            </div>
+            <div className="flex flex-col justify-center gap-8 font-light text-center">
+              <div className="flex flex-col gap-5">
+                <p className="md:text-2xl text-center">
+                  Invite you to join them and their children as they
+                </p>
+                <p className="font-handwritten text-4xl">renew their vows</p>
+              </div>
+              <div className="flex flex-col gap-2">
+                <p className="text-xl">On Thursday 3PM, 11th of June</p>
+                <a
+                  href="#"
+                  className="self-center bg-accent px-4 py-2 rounded-full w-fit"
+                >
+                  <p>📍 4th Street, Beverly Hills</p>
+                </a>
+              </div>
+            </div>
+            <div className="flex flex-col justify-center items-center gap-1 text-xl">
+              <p>We kindly encourage you to come in your</p>
+              <p className="bg-blue-900 px-2 py-1 font-light text-white">
+                Formal Midnight Blue Attire.
+              </p>
+            </div>
+            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+              <NavLink to={"/rsvp"}>
+                <Button className="rounded-none scale-120" size={"lg"}>
+                  <p>Click Here for RSVP</p>
+                </Button>
+              </NavLink>
+            </motion.div>
           </div>
-          <p className="justify-end">
-            We kindly encourage you to come in your{" "}
-            <span className="font-extrabold limelight">
-              Midnight Blue Formal
-            </span>
-            Attire.
-          </p>
-          <div className="bg-secondary p-4 rounded-full text-center scale-75">
-            <p className="font-light text-sm">SCROLL</p>
-            <p>↓</p>
-          </div>
-        </motion.div>
+        </section>
       </div>
-      <Separator />
-      <div className="md:h-svh">hello</div>
     </div>
   );
 }
