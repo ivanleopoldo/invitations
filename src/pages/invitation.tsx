@@ -1,18 +1,19 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { db } from "@/lib/instantdb";
+import { db } from "@/lib/db";
 import { motion } from "motion/react";
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router";
+import { NavLink, useNavigate, useParams } from "react-router";
 
 export default function InviteLink() {
   const navigate = useNavigate();
+  const params = useParams();
   return (
     <div>
       <div className="relative flex md:flex-row flex-col w-full md:h-svh">
         <section className="relative flex md:flex-[1.5] h-[50vh] md:h-full">
           <img
-            src={"final.jpg"}
+            src={"../../public/final.jpg"}
             className="invert-20 sepia-50 w-full object-cover object-top"
           />
           <div className="bottom-0 absolute">
@@ -68,7 +69,7 @@ export default function InviteLink() {
               </p>
             </div>
             <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-              <NavLink to={"/rsvp"}>
+              <NavLink to={`/rsvp/${params.inviteid}`}>
                 <Button className="rounded-none scale-120" size={"lg"}>
                   <p>Click Here for RSVP</p>
                 </Button>

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router";
 import { useAuth } from "@clerk/react";
-import { db } from "@/lib/instantdb";
+import { db } from "@/lib/db";
 
 export default function ProtectedLayout() {
   const { isSignedIn, isLoaded } = useAuth();

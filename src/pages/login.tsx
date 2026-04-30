@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useAuth, useSignIn } from "@clerk/react";
 import { toast } from "sonner";
 import { useNavigate } from "react-router";
-import { db } from "@/lib/instantdb";
+import { db } from "@/lib/db";
 
 export default function Login() {
   const navigate = useNavigate();

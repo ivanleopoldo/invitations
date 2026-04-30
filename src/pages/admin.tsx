@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useAuth } from "@clerk/react";
 import { Button } from "@/components/ui/button";
-import { db } from "@/lib/instantdb";
+import { db } from "@/lib/db";
 
 export default function AdminPanel() {
   const { signOut } = useAuth();

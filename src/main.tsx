@@ -10,6 +10,8 @@ import AdminPanel from "./pages/admin.tsx";
 import Login from "./pages/login.tsx";
 import { Toaster } from "@/components/ui/sonner";
 import ProtectedLayout from "./layouts/protected-layout.tsx";
+import Congrats from "./pages/congrats.tsx";
+import ItsOkay from "./pages/itsokay.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -29,12 +31,14 @@ function Nav() {
       <BrowserRouter>
         <Routes>
           <Route index path="/" element={<App />} />
-          <Route path="/invite" element={<InviteLink />} />
-          <Route path="/rsvp" element={<RSVP />} />
+          <Route path="/invite/:inviteid" element={<InviteLink />} />
+          <Route path="/rsvp/:inviteid" element={<RSVP />} />
+          <Route path="/congrats" element={<Congrats />} />
+          <Route path="/itsokay" element={<ItsOkay />} />
           <Route element={<ProtectedLayout />}>
             <Route path="/admin" element={<AdminPanel />} />
           </Route>
-          <Route path="/login" element={<Login />} />
+          <Route path="/login/*" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </ClerkProvider>
