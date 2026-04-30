@@ -1,22 +1,22 @@
+import { Button } from "./components/ui/button";
+
 export default function App() {
   return (
-    <div className="flex flex-row">
-      <div className="top-0 left-0 fixed w-[60%] h-svh">
-        <img
-          src="together.jpg"
-          className="sepia-50 w-full h-full object-cover object-top"
-        />
-      </div>
-      <div className="ml-[60%] w-full">
-        <div className="bg-red-400 h-svh">
-          <p className="left-0 absolute text-background">06</p>
-          hello
-        </div>
-        <div className="bg-blue-400 w-full h-svh">
-          <p className="left-0 absolute text-background">06</p>
-          hello
+    <div className="flex flex-col justify-center items-center gap-2 md:gap-4 w-full h-svh">
+      <div>
+        <p className="font-major text-xl">We still do.</p>
+        <div className="-rotate-12">
+          <p className="font-cursive text-7xl">Hannah</p>
+          <p className="ml-32 font-cursive text-7xl">& Leo</p>
         </div>
       </div>
+      <p className="font-handwritten text-xl md:text-5xl">
+        Have you received an invite?
+      </p>
+      <p className="font-italiana text-lg md:text-4xl">
+        If so, please use the invite link sent by the hosts.
+      </p>
+      <Button>Login with Access Code</Button>
     </div>
   );
 }
