@@ -1,6 +1,8 @@
 import { Button } from "./components/ui/button";
+import { useNavigate } from "react-router";
 
 export default function App() {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col justify-center items-center gap-2 md:gap-4 w-full h-svh">
       <div>
@@ -16,7 +18,7 @@ export default function App() {
       <p className="font-italiana text-lg md:text-4xl">
         If so, please use the invite link sent by the hosts.
       </p>
-      <Button>Login with Access Code</Button>
+      <Button onClick={() => navigate("/login")}>Login with Access Code</Button>
     </div>
   );
 }
