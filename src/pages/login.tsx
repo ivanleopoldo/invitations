@@ -11,7 +11,6 @@ export default function Login() {
   const navigate = useNavigate();
   const { signIn } = useSignIn();
   const { isSignedIn } = useAuth();
-  const { isLoading, user } = db.useAuth();
   const [password, setPassword] = useState("");
 
   const handleSubmit = async () => {
@@ -25,8 +24,13 @@ export default function Login() {
     });
 
     if (error) {
+      if (error.errors.length > 0) {
+        error.errors.map((val) => {
+          toast.error(JSON.stringify(val));
+        });
+      }
       console.error(JSON.stringify(error, null, 2));
-      toast.error("Error Logging In", { description: error.cause.message });
+      toast.error("Error Logging In", { description: error.errors });
       return;
     }
 
@@ -45,8 +49,12 @@ export default function Login() {
               if (url.startsWith("http")) {
                 window.location.href = url;
               } else {
+                toast.success("Login Successful");
                 navigate(url);
               }
+            })
+            .catch((err) => {
+              alert(JSON.stringify(err));
             });
         },
       });
@@ -54,10 +62,10 @@ export default function Login() {
   };
 
   useEffect(() => {
-    if (isSignedIn && user && !isLoading) {
+    if (isSignedIn) {
       navigate("/admin");
     }
-  }, [isSignedIn, user, isLoading]);
+  }, [isSignedIn]);
 
   return (
     <div className="flex flex-col justify-center items-center gap-5 w-full h-svh">

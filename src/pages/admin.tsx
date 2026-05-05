@@ -33,9 +33,9 @@ export default function AdminPanel() {
   }
 
   return (
-    <div className="flex flex-row gap-6 p-18">
+    <div className="flex md:flex-row flex-col justify-center gap-6 p-2 md:p-18">
       <div className="flex flex-col items-center gap-6">
-        <Card className="w-fit">
+        <Card className="w-full md:w-fit">
           <CardContent className="flex flex-col justify-center items-center">
             <h1 className="flex flex-col font-italiana font-bold text-2xl">
               Headcount
@@ -47,11 +47,11 @@ export default function AdminPanel() {
             </p>
           </CardContent>
         </Card>
-        <Button onClick={() => signOutAll()} variant="destructive">
+        <Button className="w-full md:w-fit" onClick={() => signOutAll()}>
           Sign Out
         </Button>
       </div>
-      <div className="">
+      <div className="w-full">
         <DataTable columns={columns} data={data.invited} />
       </div>
     </div>

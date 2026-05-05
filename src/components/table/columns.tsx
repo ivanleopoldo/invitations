@@ -1,4 +1,9 @@
 import type { ColumnDef } from "@tanstack/react-table";
+import { ArrowUpDown, CopyIcon, CopyCheckIcon } from "lucide-react";
+import { Button } from "../ui/button";
+import copy from "copy-to-clipboard";
+import { toast } from "sonner";
+import { useState } from "react";
 
 export type Invited = {
   id: string;
@@ -11,28 +16,62 @@ export type Invited = {
 
 export const columns: ColumnDef<Invited>[] = [
   {
-    accessorKey: "prefix",
-    header: "Prefix",
-  },
-  {
-    accessorKey: "name",
-    header: "Name",
-  },
-  {
-    accessorKey: "max_num_of_attendees",
-    header: "Max Number of Seats",
-  },
-  {
-    accessorFn: (row) =>
-      `${row.num_of_attendees === null ? 0 : row.num_of_attendees}`,
-    header: "Number of People Going",
+    header: "Invite",
+    cell: ({ row }) => {
+      const [isCopied, setIsCopied] = useState(false);
+      const link = `https://localhost:5173/invite/${row.original.id}`;
+      return (
+        <Button
+          size={"icon"}
+          onClick={() => {
+            copy(link)
+              .then(() => {
+                toast.success("Copied");
+                setIsCopied(true);
+              })
+              .catch((err) => {
+                toast.error(err);
+              });
+          }}
+        >
+          {!isCopied ? (
+            <>
+              <CopyIcon />
+            </>
+          ) : (
+            <>
+              <CopyCheckIcon />
+            </>
+          )}
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "role",
     header: "Role",
   },
   {
-    accessorFn: (row) => `https://localhost:5173/invite/${row.id}`,
-    header: "Invite Link",
+    accessorKey: "name",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Name
+          <ArrowUpDown className="ml-2 w-4 h-4" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "max_num_of_attendees",
+    header: "Max",
+  },
+  {
+    accessorFn: (row) =>
+      `${row.num_of_attendees === null ? 0 : row.num_of_attendees}`,
+    header: "Going",
   },
 ];
