@@ -12,7 +12,6 @@ import { Toaster } from "@/components/ui/sonner";
 import ProtectedLayout from "./layouts/protected-layout.tsx";
 import Congrats from "./pages/congrats.tsx";
 import ItsOkay from "./pages/itsokay.tsx";
-import Loading from "./components/Loading.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
