@@ -114,7 +114,7 @@ export default function RSVP() {
       <FieldSet className="w-3/4 md:w-1/4">
         <FieldGroup>
           <Field>
-            <FieldLabel htmlFor="number">How many are going?</FieldLabel>
+            <FieldLabel htmlFor="number">How many of you are going?</FieldLabel>
             <Input
               className={"border-primary border-2"}
               id="number"
