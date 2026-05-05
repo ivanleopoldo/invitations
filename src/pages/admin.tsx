@@ -3,14 +3,17 @@ import { useAuth } from "@clerk/react";
 import { Button } from "@/components/ui/button";
 import { db } from "@/lib/db";
 import { DataTable } from "@/components/table";
-import { columns } from "@/components/table/columns";
+import { columns, type Invited } from "@/components/table/columns";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router";
 import Loading from "@/components/Loading";
 
 export default function AdminPanel() {
   const { signOut, isSignedIn } = useAuth();
-  const { data, isLoading } = db.useQuery({ invited: {} });
+  const { data, isLoading } = db.useQuery({ invited: {} }) as {
+    data?: { invited: Invited[] } | null;
+    isLoading: boolean;
+  };
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -43,7 +46,6 @@ export default function AdminPanel() {
             </h1>
             <p className="font-italiana text-6xl">
               {data?.invited?.reduce((total, current) => {
-                //@ts-expect-error
                 return total + (current?.num_of_attendees ?? 0);
               }, 0) ?? 0}
             </p>
@@ -54,7 +56,6 @@ export default function AdminPanel() {
         </Button>
       </div>
       <div className="w-full">
-        {/* @ts-expect-error */}
         <DataTable columns={columns} data={data.invited} />
       </div>
     </div>

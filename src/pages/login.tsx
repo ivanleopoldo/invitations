@@ -42,6 +42,8 @@ export default function Login() {
         navigate: async ({ session, decorateUrl }) => {
           const idToken = await session.getToken();
 
+          if (!idToken) return;
+
           db.auth
             .signInWithIdToken({
               clientName: "clerk",
