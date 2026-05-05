@@ -4,6 +4,7 @@ import { Button } from "../ui/button";
 import copy from "copy-to-clipboard";
 import { toast } from "sonner";
 import { useState } from "react";
+import { URL } from "@/lib/constants";
 
 export type Invited = {
   id: string;
@@ -19,7 +20,7 @@ export const columns: ColumnDef<Invited>[] = [
     header: "Invite",
     cell: ({ row }) => {
       const [isCopied, setIsCopied] = useState(false);
-      const link = `https://localhost:5173/invite/${row.original.id}`;
+      const link = `${URL}/invite/${row.original.id}`;
       return (
         <Button
           size={"icon"}

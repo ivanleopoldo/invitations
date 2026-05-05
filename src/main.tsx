@@ -2,7 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
-import { BrowserRouter, Route, Routes } from "react-router";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import InviteLink from "@/pages/invitation";
 import RSVP from "./pages/rsvp.tsx";
 import { ClerkProvider } from "@clerk/react";
@@ -12,6 +12,7 @@ import { Toaster } from "@/components/ui/sonner";
 import ProtectedLayout from "./layouts/protected-layout.tsx";
 import Congrats from "./pages/congrats.tsx";
 import ItsOkay from "./pages/itsokay.tsx";
+import Loading from "./components/Loading.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -39,6 +40,7 @@ function Nav() {
             <Route path="/admin" element={<AdminPanel />} />
           </Route>
           <Route path="/login/*" element={<Login />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
     </ClerkProvider>

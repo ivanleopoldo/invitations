@@ -13,6 +13,7 @@ import { useParams } from "react-router";
 import { db, type InvitedUser } from "@/lib/db";
 import { toast } from "sonner";
 import { useNavigate } from "react-router";
+import Loading from "@/components/Loading";
 
 export default function RSVP() {
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ export default function RSVP() {
   }, [data]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   const userData = data.invited[0];

@@ -6,6 +6,7 @@ import { DataTable } from "@/components/table";
 import { columns } from "@/components/table/columns";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router";
+import Loading from "@/components/Loading";
 
 export default function AdminPanel() {
   const { signOut, isSignedIn } = useAuth();
@@ -25,7 +26,7 @@ export default function AdminPanel() {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (data) {
