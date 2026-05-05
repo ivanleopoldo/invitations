@@ -56,7 +56,7 @@ export default function AdminPanel() {
         </Button>
       </div>
       <div className="w-full">
-        <DataTable columns={columns} data={data.invited} />
+        <DataTable columns={columns} data={data?.invited ?? []} />
       </div>
     </div>
   );
