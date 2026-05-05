@@ -42,7 +42,7 @@ export default function InviteLink() {
               </p>
             </div>
             {isMobile && <img src={"/scribble.png"} />}
-            <div>
+            <div className="-rotate-12">
               <p className="font-cursive text-7xl">Hannah</p>
               <p className="ml-32 font-cursive text-7xl">& Leo</p>
             </div>

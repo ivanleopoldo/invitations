@@ -41,7 +41,7 @@ export default function Congrats() {
         <p className="text-xl">On Thursday 6PM, 11th of June</p>
         <a
           href="#"
-          className="self-center bg-accent px-4 py-2 rounded-full w-fit"
+          className="self-center bg-secondary px-4 py-2 rounded-full w-fit text-secondary-foreground text-center scale-75 md:scale-100"
         >
           <p>📍 The Glass Pavilion, Beverly View Events Pavilion</p>
         </a>
