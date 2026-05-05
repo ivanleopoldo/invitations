@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function ItsOkay() {
   return (
     <div className="flex flex-col justify-center items-center gap-8 p-12 h-svh">

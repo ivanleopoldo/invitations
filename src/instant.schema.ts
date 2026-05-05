@@ -4,6 +4,13 @@ import { i } from "@instantdb/react";
 
 const _schema = i.schema({
   entities: {
+    invited: i.entity({
+      max_num_of_attendees: i.number(),
+      name: i.string(),
+      num_of_attendees: i.number().optional(),
+      prefix: i.string(),
+      role: i.string(),
+    }),
     $files: i.entity({
       path: i.string().unique().indexed(),
       url: i.string(),
@@ -18,13 +25,6 @@ const _schema = i.schema({
       email: i.string().unique().indexed().optional(),
       imageURL: i.string().optional(),
       type: i.string().optional(),
-    }),
-    invited: i.entity({
-      max_num_of_attendees: i.number(),
-      name: i.string(),
-      num_of_attendees: i.number().optional(),
-      prefix: i.string(),
-      role: i.string(),
     }),
   },
   links: {
