@@ -1,38 +1,35 @@
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { db } from "@/lib/db";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { motion } from "motion/react";
-import { useState } from "react";
-import { NavLink, useNavigate, useParams } from "react-router";
+import { NavLink, useParams } from "react-router";
 
 export default function InviteLink() {
-  const navigate = useNavigate();
   const params = useParams();
+  const isMobile = useIsMobile();
   return (
-    <div>
-      <div className="relative flex md:flex-row flex-col w-full md:h-svh">
-        <section className="relative flex md:flex-[1.5] h-[50vh] md:h-full">
-          <img
-            src={"/final.jpg"}
-            className="invert-20 sepia-50 w-full object-cover object-top"
-          />
-          <div className="bottom-0 absolute">
-            <div className="relative flex flex-row md:flex-col">
-              <p className="font-major font-bold text-secondary md:text-[12rem]/60 text-7xl/35 motion-preset-slide-up">
-                06
-              </p>
-              <p className="font-major font-bold text-secondary md:text-[12rem]/15 text-7xl/35 motion-delay-300 motion-preset-slide-up">
-                11
-              </p>
-              <p className="font-major font-bold text-secondary md:text-[12rem]/60 text-7xl/35 motion-delay-600 motion-preset-slide-up-sm">
-                26
-              </p>
+    <div className="md:p-0 px-4 py-8">
+      <div className="relative flex md:flex-row flex-col gap-8 w-full md:h-svh">
+        {!isMobile && (
+          <section className="relative flex md:flex-[1.5] h-[50vh] md:h-full">
+            <img
+              src={"/final.jpg"}
+              className="w-full object-cover object-top"
+            />
+            <div className="bottom-0 absolute">
+              <div className="relative flex flex-row md:flex-col">
+                <p className="font-major font-bold text-secondary md:text-[12rem]/60 text-7xl/35 motion-preset-slide-up">
+                  06
+                </p>
+                <p className="font-major font-bold text-secondary md:text-[12rem]/15 text-7xl/35 motion-delay-300 motion-preset-slide-up">
+                  11
+                </p>
+                <p className="font-major font-bold text-secondary md:text-[12rem]/60 text-7xl/35 motion-delay-600 motion-preset-slide-up-sm">
+                  26
+                </p>
+              </div>
             </div>
-          </div>
-          <div className="right-0 bottom-10 absolute">
-            <p className="font-major text-primary text-6xl">We still do.</p>
-          </div>
-        </section>
+          </section>
+        )}
         <section className="flex flex-col md:flex-1 justify-center items-center gap-8 md:p-18 md:h-full min-h-[50vh]">
           <div className="flex flex-col justify-center items-center gap-8">
             <div>
@@ -44,30 +41,36 @@ export default function InviteLink() {
                 of their marriage
               </p>
             </div>
-            <div className="-rotate-12">
+            {isMobile && <img src={"/scribble.png"} />}
+            <div>
               <p className="font-cursive text-7xl">Hannah</p>
               <p className="ml-32 font-cursive text-7xl">& Leo</p>
             </div>
-            <div className="flex flex-col justify-center gap-8 font-light text-center">
+            <div className="flex flex-col justify-center gap-4 px-2 font-light text-center">
               <div className="flex flex-col gap-5">
                 <p className="md:text-2xl text-center">
-                  Invite you to join them and their children as they
+                  Together with their children, invite you to join them for a
+                  dinner and dancing on
                 </p>
-                <p className="font-handwritten text-4xl">renew their vows</p>
+                <p className="font-handwritten text-xl md:text-3xl">
+                  Thursday, 11th of June 2026
+                </p>
+                <p className="text-xl">at six o'clock in the evening at</p>
               </div>
-              <div className="flex flex-col gap-2">
-                <p className="text-xl">On Thursday 6PM, 11th of June</p>
+              <div className="flex flex-col gap-2 scale-75 md:scale-100">
                 <a
                   href="#"
                   className="self-center bg-accent px-4 py-2 rounded-full w-fit"
                 >
-                  <p>📍 The Glass Pavilion, Beverly View Events Pavilion</p>
+                  <p className="text-secondary-foreground">
+                    📍 The Glass Pavilion, Beverly View Events Pavilion
+                  </p>
                 </a>
               </div>
             </div>
-            <div className="flex flex-col justify-center items-center gap-1 text-xl">
+            <div className="flex flex-col justify-center items-center gap-1 text-normal md:text-xl text-center">
               <p>We kindly encourage you to come in your</p>
-              <p className="bg-blue-900 px-2 py-1 font-light text-white">
+              <p className="bg-gray-200 px-2 py-1 font-light text-background">
                 Formal Midnight Blue Attire.
               </p>
             </div>

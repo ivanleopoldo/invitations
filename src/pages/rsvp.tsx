@@ -80,7 +80,7 @@ export default function RSVP() {
         </p>
         <p className="text-xl text-center">
           We have reserved{" "}
-          <span className="bg-primary px-2 py-1 font-light text-background">
+          <span className="bg-primary px-2 py-1 font-light">
             {userData.max_num_of_attendees} seats
           </span>{" "}
           for you.
@@ -110,8 +110,8 @@ export default function RSVP() {
           </Button>
         </motion.div>
       </FieldSet>
-      <div>
-        <p className="text-muted-foreground">
+      <div className="px-8">
+        <p className="text-foreground/50 text-center">
           You can revisit this website if you've changed your mind.
         </p>
       </div>
