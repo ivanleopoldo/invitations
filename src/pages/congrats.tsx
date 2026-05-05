@@ -1,5 +1,4 @@
 import confetti from "canvas-confetti";
-import React from "react";
 
 export default function Congrats() {
   const duration = 3 * 1000;

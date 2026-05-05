@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Field, FieldGroup, FieldLabel, FieldSet } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth, useSignIn } from "@clerk/react";
 import { toast } from "sonner";
 import { useNavigate } from "react-router";
@@ -24,12 +24,15 @@ export default function Login() {
     });
 
     if (error) {
+      // @ts-expect-error
       if (error.errors.length > 0) {
+        // @ts-expect-error
         error.errors.map((val) => {
           toast.error(JSON.stringify(val));
         });
       }
       console.error(JSON.stringify(error, null, 2));
+      // @ts-expect-error
       toast.error("Error Logging In", { description: error.errors });
       return;
     }

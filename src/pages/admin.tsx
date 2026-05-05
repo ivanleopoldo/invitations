@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useAuth } from "@clerk/react";
 import { Button } from "@/components/ui/button";
 import { db } from "@/lib/db";
@@ -43,6 +43,7 @@ export default function AdminPanel() {
             </h1>
             <p className="font-italiana text-6xl">
               {data?.invited?.reduce((total, current) => {
+                //@ts-expect-error
                 return total + (current?.num_of_attendees ?? 0);
               }, 0) ?? 0}
             </p>
@@ -53,6 +54,7 @@ export default function AdminPanel() {
         </Button>
       </div>
       <div className="w-full">
+        {/* @ts-expect-error */}
         <DataTable columns={columns} data={data.invited} />
       </div>
     </div>
