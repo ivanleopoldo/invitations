@@ -13,7 +13,7 @@ export default function InviteLink() {
       <div className="relative flex md:flex-row flex-col w-full md:h-svh">
         <section className="relative flex md:flex-[1.5] h-[50vh] md:h-full">
           <img
-            src={"../../public/final.jpg"}
+            src={"/final.jpg"}
             className="invert-20 sepia-50 w-full object-cover object-top"
           />
           <div className="bottom-0 absolute">
@@ -28,6 +28,9 @@ export default function InviteLink() {
                 26
               </p>
             </div>
+          </div>
+          <div className="right-0 bottom-10 absolute">
+            <p className="font-major text-primary text-6xl">We still do.</p>
           </div>
         </section>
         <section className="flex flex-col md:flex-1 justify-center items-center gap-8 md:p-18 md:h-full min-h-[50vh]">
@@ -53,12 +56,12 @@ export default function InviteLink() {
                 <p className="font-handwritten text-4xl">renew their vows</p>
               </div>
               <div className="flex flex-col gap-2">
-                <p className="text-xl">On Thursday 3PM, 11th of June</p>
+                <p className="text-xl">On Thursday 6PM, 11th of June</p>
                 <a
                   href="#"
                   className="self-center bg-accent px-4 py-2 rounded-full w-fit"
                 >
-                  <p>📍 4th Street, Beverly Hills</p>
+                  <p>📍 The Glass Pavilion, Beverly View Events Pavilion</p>
                 </a>
               </div>
             </div>

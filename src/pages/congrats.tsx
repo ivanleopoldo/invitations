@@ -38,12 +38,12 @@ export default function Congrats() {
       </div>
       <p className="font-handwritten text-3xl md:text-6xl">See you there!</p>
       <div className="flex flex-col justify-center items-center gap-2">
-        <p className="text-xl">On Thursday 3PM, 11th of June</p>
+        <p className="text-xl">On Thursday 6PM, 11th of June</p>
         <a
           href="#"
           className="self-center bg-accent px-4 py-2 rounded-full w-fit"
         >
-          <p>📍 4th Street, Beverly Hills</p>
+          <p>📍 The Glass Pavilion, Beverly View Events Pavilion</p>
         </a>
       </div>
       <p className="font-major md:text-normal text-xs text-center text-wrap">
