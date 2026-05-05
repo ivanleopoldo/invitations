@@ -57,9 +57,6 @@ export default function Login() {
                 toast.success("Login Successful");
                 navigate(url);
               }
-            })
-            .catch((err) => {
-              alert(JSON.stringify(err));
             });
         },
       });
@@ -74,15 +71,19 @@ export default function Login() {
 
   return (
     <div className="flex flex-col justify-center items-center gap-5 w-full h-svh">
-      <div>
-        <p className="font-major text-xl">We still do.</p>
-        <div className="-rotate-12">
-          <p className="font-cursive text-7xl">Hannah</p>
-          <p className="ml-32 font-cursive text-7xl">& Leo</p>
+      <div className="gap-8 px-4 max-w-full">
+        <p className="font-major text-md md:text-2xl">We still do.</p>
+        <div className="text-center -rotate-12">
+          <p className="font-cursive text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+            Hannah
+          </p>
+          <p className="ml-8 sm:ml-16 md:ml-24 lg:ml-32 font-cursive text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+            & Leo
+          </p>
         </div>
       </div>
-      <p className="font-handwritten text-4xl">Login</p>
-      <FieldSet className="w-2/3 md:w-1/5">
+      <p className="font-handwritten text-2xl sm:text-3xl md:text-4xl">Login</p>
+      <FieldSet className="px-4 w-full max-w-xs">
         <FieldGroup>
           <Field>
             <FieldLabel htmlFor="passphrase">Passphrase</FieldLabel>

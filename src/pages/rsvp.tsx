@@ -94,12 +94,16 @@ export default function RSVP() {
 
   return (
     <div className="flex flex-col justify-center items-center gap-8 w-full h-svh">
-      <div className="flex flex-col justify-center">
-        <p className="font-handwritten font-black text-4xl">Hello,</p>
-        <p className="ml-12 font-handwritten text-3xl md:text-4xl">
-          {userData.prefix} {userData.name}
-        </p>
-        <p className="text-xl text-center">
+      <div className="flex flex-col">
+        <div className="flex flex-col items-center text-center">
+          <p className="font-handwritten font-black text-2xl md:text-4xl">
+            Hello,
+          </p>
+          <p className="font-handwritten text-2xl md:text-4xl">
+            {userData.prefix} {userData.name}
+          </p>
+        </div>
+        <p className="text-sm md:text-xl text-center">
           We have reserved{" "}
           <span className="bg-primary px-2 py-1 font-light">
             {userData.max_num_of_attendees} seats
@@ -132,7 +136,7 @@ export default function RSVP() {
         </motion.div>
       </FieldSet>
       <div className="px-8">
-        <p className="text-foreground/50 text-center">
+        <p className="text-foreground/50 text-xs md:text-base text-center">
           You can revisit this website if you've changed your mind.
         </p>
       </div>

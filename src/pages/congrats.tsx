@@ -27,25 +27,35 @@ export default function Congrats() {
   }, 250);
 
   return (
-    <div className="flex flex-col justify-center items-center gap-8 p-12 h-svh">
-      <div>
-        <p className="font-major text-xl">We still do.</p>
-        <div className="-rotate-12">
-          <p className="font-cursive text-7xl">Hannah</p>
-          <p className="ml-32 font-cursive text-7xl">& Leo</p>
+    <div className="flex flex-col justify-center items-center gap-8 p-4 md:p-12 h-svh">
+      <div className="max-w-full text-center">
+        <p className="font-major text-xl md:text-2xl">We still do.</p>
+        <div className="text-center -rotate-12">
+          <p className="font-cursive text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+            Hannah
+          </p>
+          <p className="font-cursive text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+            & Leo
+          </p>
         </div>
       </div>
-      <p className="font-handwritten text-3xl md:text-6xl">See you there!</p>
-      <div className="flex flex-col justify-center items-center gap-2">
-        <p className="text-xl">On Thursday 6PM, 11th of June</p>
+      <p className="font-handwritten text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center">
+        See you there!
+      </p>
+      <div className="flex flex-col justify-center items-center gap-2 px-4">
+        <p className="text-base sm:text-lg md:text-xl text-center">
+          On Thursday 6PM, 11th of June
+        </p>
         <a
-          href="#"
-          className="self-center bg-secondary px-4 py-2 rounded-full w-fit text-secondary-foreground text-center scale-75 md:scale-100"
+          href="https://maps.app.goo.gl/CuEfWZiC2ZwLL4K47"
+          className="self-center bg-secondary px-4 py-2 rounded-full w-fit text-secondary-foreground text-center scale-75 sm:scale-90 md:scale-100"
         >
-          <p>📍 The Glass Pavilion, Beverly View Events Pavilion</p>
+          <p className="text-sm sm:text-base md:text-lg">
+            📍 The Glass Pavilion, Beverly View Events Pavilion
+          </p>
         </a>
       </div>
-      <p className="font-major md:text-normal text-xs text-center text-wrap">
+      <p className="px-4 font-major text-xs sm:text-sm md:text-base text-center">
         Revisit the website if you've changed your mind
       </p>
     </div>

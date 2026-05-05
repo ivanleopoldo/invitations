@@ -43,8 +43,10 @@ export default function InviteLink() {
             </div>
             {isMobile && <img src={"/scribble.png"} />}
             <div className="-rotate-12">
-              <p className="font-cursive text-7xl">Hannah</p>
-              <p className="ml-32 font-cursive text-7xl">& Leo</p>
+              <p className="font-cursive text-5xl md:text-7xl">Hannah</p>
+              <p className="ml-16 md:ml-32 font-cursive text-5xl md:text-7xl">
+                & Leo
+              </p>
             </div>
             <div className="flex flex-col justify-center gap-4 px-2 font-light text-center">
               <div className="flex flex-col gap-5">
@@ -57,9 +59,9 @@ export default function InviteLink() {
                 </p>
                 <p className="text-xl">at six o'clock in the evening at</p>
               </div>
-              <div className="flex flex-col gap-2 scale-75 md:scale-100">
+              <div className="flex flex-col gap-2 scale-60 md:scale-100">
                 <a
-                  href="#"
+                  href="https://maps.app.goo.gl/CuEfWZiC2ZwLL4K47"
                   className="self-center bg-accent px-4 py-2 rounded-full w-fit"
                 >
                   <p className="text-secondary-foreground">
