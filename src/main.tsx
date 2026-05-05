@@ -1,17 +1,20 @@
-import { StrictMode } from "react";
+import { StrictMode, Suspense, lazy } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import App from "./App.tsx";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
-import InviteLink from "@/pages/invitation";
-import RSVP from "./pages/rsvp.tsx";
 import { ClerkProvider } from "@clerk/react";
-import AdminPanel from "./pages/admin.tsx";
-import Login from "./pages/login.tsx";
 import { Toaster } from "@/components/ui/sonner";
-import ProtectedLayout from "./layouts/protected-layout.tsx";
-import Congrats from "./pages/congrats.tsx";
-import ItsOkay from "./pages/itsokay.tsx";
+import Loading from "@/components/Loading";
+
+// Lazy load components for code splitting
+const App = lazy(() => import("./App.tsx"));
+const InviteLink = lazy(() => import("@/pages/invitation"));
+const RSVP = lazy(() => import("./pages/rsvp.tsx"));
+const AdminPanel = lazy(() => import("./pages/admin.tsx"));
+const Login = lazy(() => import("./pages/login.tsx"));
+const ProtectedLayout = lazy(() => import("./layouts/protected-layout.tsx"));
+const Congrats = lazy(() => import("./pages/congrats.tsx"));
+const ItsOkay = lazy(() => import("./pages/itsokay.tsx"));
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -30,15 +33,71 @@ function Nav() {
     >
       <BrowserRouter>
         <Routes>
-          <Route index path="/" element={<App />} />
-          <Route path="/invite/:inviteid" element={<InviteLink />} />
-          <Route path="/rsvp/:inviteid" element={<RSVP />} />
-          <Route path="/congrats" element={<Congrats />} />
-          <Route path="/itsokay" element={<ItsOkay />} />
-          <Route element={<ProtectedLayout />}>
-            <Route path="/admin" element={<AdminPanel />} />
+          <Route
+            index
+            path="/"
+            element={
+              <Suspense fallback={<Loading />}>
+                <App />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/invite/:inviteid"
+            element={
+              <Suspense fallback={<Loading />}>
+                <InviteLink />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/rsvp/:inviteid"
+            element={
+              <Suspense fallback={<Loading />}>
+                <RSVP />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/congrats"
+            element={
+              <Suspense fallback={<Loading />}>
+                <Congrats />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/itsokay"
+            element={
+              <Suspense fallback={<Loading />}>
+                <ItsOkay />
+              </Suspense>
+            }
+          />
+          <Route
+            element={
+              <Suspense fallback={<Loading />}>
+                <ProtectedLayout />
+              </Suspense>
+            }
+          >
+            <Route
+              path="/admin"
+              element={
+                <Suspense fallback={<Loading />}>
+                  <AdminPanel />
+                </Suspense>
+              }
+            />
           </Route>
-          <Route path="/login/*" element={<Login />} />
+          <Route
+            path="/login/*"
+            element={
+              <Suspense fallback={<Loading />}>
+                <Login />
+              </Suspense>
+            }
+          />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>

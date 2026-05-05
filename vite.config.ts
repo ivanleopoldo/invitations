@@ -15,5 +15,28 @@ export default defineConfig({
   base: "/",
   build: {
     outDir: "dist",
+    rollupOptions: {
+      output: {
+        manualChunks: (id) => {
+          // Split vendor libraries into separate chunks
+          if (id.includes("react") && id.includes("react-dom")) {
+            return "vendor";
+          }
+          if (id.includes("react-router")) {
+            return "router";
+          }
+          if (id.includes("@clerk")) {
+            return "clerk";
+          }
+          if (id.includes("@tanstack") || id.includes("motion")) {
+            return "ui";
+          }
+          if (id.includes("sonner") || id.includes("copy-to-clipboard")) {
+            return "utils";
+          }
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1000, // Increase warning limit to 1MB
   },
 });

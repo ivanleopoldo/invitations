@@ -117,7 +117,7 @@ export default function RSVP() {
               type="number"
               value={numGoing}
               onChange={(e) => {
-                setNumGoing(eval(e.currentTarget.value));
+                setNumGoing(parseInt(e.currentTarget.value) || 0);
               }}
               min={0}
               max={userData.max_num_of_attendees}
