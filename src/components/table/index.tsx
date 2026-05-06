@@ -28,6 +28,7 @@ import {
   InputGroupAddon,
   InputGroupInput,
 } from "@/components/ui/input-group";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -40,6 +41,7 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const isMobile = useIsMobile();
 
   const table = useReactTable({
     data,
@@ -165,31 +167,35 @@ export function DataTable<TData, TValue>({
             className="disabled:opacity-50 border-border/50 text-foreground hover:text-primary disabled:cursor-not-allowed"
           >
             <ArrowLeft className="w-4 h-4" />
-            Previous
+            {!isMobile && "Previous"}
           </Button>
-          <div className="flex items-center space-x-1">
-            {Array.from(
-              { length: Math.min(5, table.getPageCount()) },
-              (_, i) => {
-                const pageIndex = i;
-                return (
-                  <Button
-                    key={pageIndex}
-                    variant={
-                      table.getState().pagination.pageIndex === pageIndex
-                        ? "default"
-                        : "ghost"
-                    }
-                    size="sm"
-                    onClick={() => table.setPageIndex(pageIndex)}
-                    className="p-0 border-border/50 w-8 h-8 text-foreground hover:text-primary"
-                  >
-                    {pageIndex + 1}
-                  </Button>
-                );
-              },
-            )}
-          </div>
+          {isMobile ? (
+            <div>{table.getState().pagination.pageIndex + 1}</div>
+          ) : (
+            <div className="flex items-center space-x-1">
+              {Array.from(
+                { length: Math.min(5, table.getPageCount()) },
+                (_, i) => {
+                  const pageIndex = i;
+                  return (
+                    <Button
+                      key={pageIndex}
+                      variant={
+                        table.getState().pagination.pageIndex === pageIndex
+                          ? "default"
+                          : "ghost"
+                      }
+                      size="sm"
+                      onClick={() => table.setPageIndex(pageIndex)}
+                      className="p-0 border-border/50 w-8 h-8 text-foreground hover:text-primary"
+                    >
+                      {pageIndex + 1}
+                    </Button>
+                  );
+                },
+              )}
+            </div>
+          )}
           <Button
             variant="outline"
             size="sm"
@@ -197,7 +203,7 @@ export function DataTable<TData, TValue>({
             disabled={!table.getCanNextPage()}
             className="disabled:opacity-50 border-border/50 text-foreground hover:text-primary disabled:cursor-not-allowed"
           >
-            Next
+            {!isMobile && "Next"}
             <ArrowRight className="w-4 h-4" />
           </Button>
         </div>

@@ -149,14 +149,10 @@ export default function AdminPanel() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <Card className="bg-background/50 backdrop-blur-sm p-0 border-border/50">
-            <CardContent className="p-6">
-              <h2 className="mb-4 font-italiana font-semibold text-foreground text-xl">
-                Invitation Details
-              </h2>
-              <DataTable columns={columns} data={data?.invited ?? []} />
-            </CardContent>
-          </Card>
+          <h2 className="mb-4 font-italiana font-semibold text-foreground text-xl">
+            Invitation Details
+          </h2>
+          <DataTable columns={columns} data={data?.invited ?? []} />
         </motion.div>
       </div>
     </div>
