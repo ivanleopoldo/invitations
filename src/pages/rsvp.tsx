@@ -62,6 +62,12 @@ export default function RSVP() {
       setError("Can't be a negative number");
       return;
     }
+
+    if (isNaN(numGoing)) {
+      setError("Please enter a valid number");
+      return;
+    }
+
     useMutation(
       db.tx.invited[params.inviteid].update({ num_of_attendees: numGoing }),
     )
