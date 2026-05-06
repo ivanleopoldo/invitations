@@ -10,7 +10,7 @@ import {
   getSortedRowModel,
 } from "@tanstack/react-table";
 
-import { Input } from "@/components/ui/input";
+import { Search, ArrowLeft, ArrowRight } from "lucide-react";
 
 import {
   Table,
@@ -22,7 +22,12 @@ import {
 } from "@/components/ui/table";
 import { Button } from "../ui/button";
 import { useState } from "react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { motion } from "motion/react";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "@/components/ui/input-group";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -52,25 +57,36 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div>
-      <div className="flex items-center py-4">
-        <Input
-          placeholder="Filter name..."
-          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("name")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm placeholder:text-white/50"
-        />
+    <div className="space-y-4">
+      <div className="flex items-center space-x-2">
+        <div className="relative">
+          <InputGroup className="max-w-xs">
+            <InputGroupInput
+              placeholder="Search..."
+              className="placeholder:text-foreground/40"
+            />
+            <InputGroupAddon>
+              <Search className="text-foreground/40" />
+            </InputGroupAddon>
+          </InputGroup>
+        </div>
       </div>
-      <div className="border rounded-2xl overflow-hidden">
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="bg-background/30 shadow-sm backdrop-blur-sm border border-border/50 rounded-2xl overflow-hidden"
+      >
         <Table>
-          <TableHeader>
+          <TableHeader className="bg-primary border-border/30 border-b">
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
+              <TableRow key={headerGroup.id} className="hover:bg-transparent">
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead
+                      key={header.id}
+                      className="px-4 py-3 last:pr-4 first:pl-4 font-semibold text-foreground text-sm"
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -85,54 +101,104 @@ export function DataTable<TData, TValue>({
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
+              table.getRowModel().rows.map((row, index) => (
+                <motion.tr
                   key={row.id}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.2, delay: index * 0.05 }}
                   data-state={row.getIsSelected() && "selected"}
+                  className="group hover:bg-muted/20 border-border/20 border-b last:border-b-0 transition-all duration-200"
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell
+                      key={cell.id}
+                      className="group-hover:bg-muted/20 px-4 py-3 last:pr-4 first:pl-4 text-foreground"
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext(),
                       )}
                     </TableCell>
                   ))}
-                </TableRow>
+                </motion.tr>
               ))
             ) : (
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-24 text-center"
+                  className="h-24 text-white text-center"
                 >
-                  No results.
+                  <div className="flex flex-col items-center space-y-2">
+                    <div className="flex justify-center items-center bg-muted/50 rounded-full w-12 h-12">
+                      <Search className="w-5 h-5 text-white" />
+                    </div>
+                    <p>No invitations found</p>
+                    <p className="text-xs">Try adjusting your search terms</p>
+                  </div>
                 </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
-      </div>
-      <div className="flex flex-row justify-between items-center">
-        <p className="p-6">
-          {table.getState().pagination.pageIndex + 1}/{table.getPageCount()}
-        </p>
-        <div className="flex justify-end items-center space-x-2 py-4">
+      </motion.div>
+      <div className="flex sm:flex-row flex-col justify-between items-center gap-4 pt-2">
+        <div className="text-white text-sm">
+          Showing{" "}
+          {table.getState().pagination.pageIndex *
+            table.getState().pagination.pageSize +
+            1}{" "}
+          to{" "}
+          {Math.min(
+            (table.getState().pagination.pageIndex + 1) *
+              table.getState().pagination.pageSize,
+            table.getFilteredRowModel().rows.length,
+          )}{" "}
+          of {table.getFilteredRowModel().rows.length} results
+        </div>
+        <div className="flex items-center space-x-2">
           <Button
             variant="outline"
-            size="icon"
+            size="sm"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
+            className="disabled:opacity-50 border-border/50 text-foreground hover:text-primary disabled:cursor-not-allowed"
           >
-            <ArrowLeft />
+            <ArrowLeft className="w-4 h-4" />
+            Previous
           </Button>
+          <div className="flex items-center space-x-1">
+            {Array.from(
+              { length: Math.min(5, table.getPageCount()) },
+              (_, i) => {
+                const pageIndex = i;
+                return (
+                  <Button
+                    key={pageIndex}
+                    variant={
+                      table.getState().pagination.pageIndex === pageIndex
+                        ? "default"
+                        : "ghost"
+                    }
+                    size="sm"
+                    onClick={() => table.setPageIndex(pageIndex)}
+                    className="p-0 border-border/50 w-8 h-8 text-foreground hover:text-primary"
+                  >
+                    {pageIndex + 1}
+                  </Button>
+                );
+              },
+            )}
+          </div>
           <Button
             variant="outline"
-            size="icon"
+            size="sm"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
+            className="disabled:opacity-50 border-border/50 text-foreground hover:text-primary disabled:cursor-not-allowed"
           >
-            <ArrowRight />
+            Next
+            <ArrowRight className="w-4 h-4" />
           </Button>
         </div>
       </div>
