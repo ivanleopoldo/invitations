@@ -4,17 +4,16 @@ import "./index.css";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import { ClerkProvider } from "@clerk/react";
 import { Toaster } from "@/components/ui/sonner";
-import Loading from "@/components/general/loading.tsx";
+import ProtectedLayout from "./layouts/protected-layout.tsx";
+import InviteLink from "./pages/invitation.tsx";
+import App from "./App.tsx";
+import RSVP from "./pages/rsvp.tsx";
+import Congrats from "./pages/congrats.tsx";
+import ItsOkay from "./pages/itsokay.tsx";
+import Loading from "./components/general/loading.tsx";
 
-// Lazy load components for code splitting
-const App = lazy(() => import("./App.tsx"));
-const InviteLink = lazy(() => import("@/pages/invitation"));
-const RSVP = lazy(() => import("./pages/rsvp.tsx"));
-const AdminPanel = lazy(() => import("./pages/admin.tsx"));
-const Login = lazy(() => import("./pages/login.tsx"));
-const ProtectedLayout = lazy(() => import("./layouts/protected-layout.tsx"));
-const Congrats = lazy(() => import("./pages/congrats.tsx"));
-const ItsOkay = lazy(() => import("./pages/itsokay.tsx"));
+const Admin = lazy(() => import("./pages/admin.tsx"));
+const LoginComponent = lazy(() => import("./pages/login.tsx"));
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -33,59 +32,17 @@ function Nav() {
     >
       <BrowserRouter>
         <Routes>
-          <Route
-            index
-            path="/"
-            element={
-              <Suspense fallback={<Loading />}>
-                <App />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/invite/:inviteid"
-            element={
-              <Suspense fallback={<Loading />}>
-                <InviteLink />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/rsvp/:inviteid"
-            element={
-              <Suspense fallback={<Loading />}>
-                <RSVP />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/congrats"
-            element={
-              <Suspense fallback={<Loading />}>
-                <Congrats />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/itsokay"
-            element={
-              <Suspense fallback={<Loading />}>
-                <ItsOkay />
-              </Suspense>
-            }
-          />
-          <Route
-            element={
-              <Suspense fallback={<Loading />}>
-                <ProtectedLayout />
-              </Suspense>
-            }
-          >
+          <Route index path="/" element={<App />} />
+          <Route path="/invite/:inviteid" element={<InviteLink />} />
+          <Route path="/rsvp/:inviteid" element={<RSVP />} />
+          <Route path="/congrats" element={<Congrats />} />
+          <Route path="/itsokay" element={<ItsOkay />} />
+          <Route element={<ProtectedLayout />}>
             <Route
               path="/admin"
               element={
                 <Suspense fallback={<Loading />}>
-                  <AdminPanel />
+                  <Admin />
                 </Suspense>
               }
             />
@@ -94,7 +51,7 @@ function Nav() {
             path="/login/*"
             element={
               <Suspense fallback={<Loading />}>
-                <Login />
+                <LoginComponent />
               </Suspense>
             }
           />
