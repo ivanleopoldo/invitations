@@ -51,7 +51,7 @@ export default function InviteLink() {
                   Together with their children, invite you to join them for a
                   dinner and dancing on
                 </p>
-                <p className="font-handwritten text-xl md:text-3xl">
+                <p className="font-major text-xl md:text-2xl">
                   Thursday, 11th of June 2026
                 </p>
                 <p className="text-xl">at six o'clock in the evening at</p>
