@@ -7,7 +7,7 @@ export default function App() {
   return (
     <div className="flex flex-col justify-center items-center gap-2 md:gap-4 px-4 w-full h-svh">
       <Names />
-      <p className="font-handwritten text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-center">
+      <p className="font-italiana text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-center">
         Have you received an invite?
       </p>
       <p className="font-italiana text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-center">

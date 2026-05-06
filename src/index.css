@@ -1,8 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Italiana&family=Limelight&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Codystar:wght@300;400&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Rubik+Glitch+Pop&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Mea+Culpa&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Mea+Culpa&family=Italiana&family=Limelight&display=swap");
 
 @import "tailwindcss";
 
@@ -192,9 +188,6 @@
 
   --font-italiana: "Italiana", sans-serif;
   --font-limelight: "Limelight", sans-serif;
-  --font-handwritten: "Homemade Apple", cursive;
-  --font-codystar: "Codystar", sans-serif;
-  --font-rubik: "Rubik Glitch Pop", system-ui;
   --font-major: "Major Mono Display", monospace;
   --font-cursive: "Mea Culpa", cursive;
 }

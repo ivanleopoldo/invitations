@@ -1,5 +1,7 @@
 import confetti from "canvas-confetti";
 import { Names } from "@/components/general/names";
+import { Location } from "@/components/general/location";
+import { Footer } from "@/components/general/footer";
 
 export default function Congrats() {
   const duration = 3 * 1000;
@@ -37,18 +39,9 @@ export default function Congrats() {
         <p className="text-base sm:text-lg md:text-xl text-center">
           On Thursday 6PM, 11th of June
         </p>
-        <a
-          href="https://maps.app.goo.gl/CuEfWZiC2ZwLL4K47"
-          className="self-center bg-secondary px-4 py-2 rounded-full w-fit text-secondary-foreground text-center scale-75 sm:scale-90 md:scale-100"
-        >
-          <p className="text-sm sm:text-base md:text-lg">
-            📍 The Glass Pavilion, Beverly View Events Pavilion
-          </p>
-        </a>
+        <Location />
       </div>
-      <p className="px-4 font-major text-xs sm:text-sm md:text-base text-center">
-        Revisit the website if you've changed your mind
-      </p>
+      <Footer />
     </div>
   );
 }

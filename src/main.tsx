@@ -4,7 +4,6 @@ import "./index.css";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import { ClerkProvider } from "@clerk/react";
 import { Toaster } from "@/components/ui/sonner";
-import ProtectedLayout from "./layouts/protected-layout.tsx";
 import InviteLink from "./pages/invitation.tsx";
 import App from "./App.tsx";
 import RSVP from "./pages/rsvp.tsx";
@@ -37,16 +36,14 @@ function Nav() {
           <Route path="/rsvp/:inviteid" element={<RSVP />} />
           <Route path="/congrats" element={<Congrats />} />
           <Route path="/itsokay" element={<ItsOkay />} />
-          <Route element={<ProtectedLayout />}>
-            <Route
-              path="/admin"
-              element={
-                <Suspense fallback={<Loading />}>
-                  <Admin />
-                </Suspense>
-              }
-            />
-          </Route>
+          <Route
+            path="/admin"
+            element={
+              <Suspense fallback={<Loading />}>
+                <Admin />
+              </Suspense>
+            }
+          />
           <Route
             path="/login/*"
             element={

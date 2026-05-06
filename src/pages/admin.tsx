@@ -3,18 +3,17 @@ import { useAuth } from "@clerk/react";
 import { Button } from "@/components/ui/button";
 import { db } from "@/lib/db";
 import { DataTable } from "@/components/table";
-import { columns, type Invited } from "@/components/table/columns";
+import { columns } from "@/components/table/columns";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router";
 import Loading from "@/components/general/loading";
 import { ButtonAnimated } from "@/components/animated/button-animated";
+import { useDatabase } from "@/hooks/use-database";
 
 export default function AdminPanel() {
   const { signOut, isSignedIn } = useAuth();
-  const { data, isLoading } = db.useQuery({ invited: {} }) as {
-    data?: { invited: Invited[] } | null;
-    isLoading: boolean;
-  };
+  const { useQuery } = useDatabase();
+  const { data, isLoading } = useQuery({ invited: {} });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,10 +30,6 @@ export default function AdminPanel() {
 
   if (isLoading) {
     return <Loading />;
-  }
-
-  if (data) {
-    console.log(data);
   }
 
   return (

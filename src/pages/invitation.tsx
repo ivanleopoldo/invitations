@@ -44,7 +44,7 @@ export default function InviteLink() {
               </p>
             </div>
             {isMobile && <img src={"/scribble.png"} />}
-            <Names />
+            <Names showWeStillDo={false} />
             <div className="flex flex-col justify-center gap-4 px-2 font-light text-center">
               <div className="flex flex-col gap-5">
                 <p className="md:text-2xl text-center">

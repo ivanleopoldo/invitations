@@ -9,19 +9,22 @@ import {
   FieldSet,
 } from "@/components/ui/field";
 import { useParams } from "react-router";
-import { db } from "@/lib/db";
 import { toast } from "sonner";
 import { useNavigate } from "react-router";
 import Loading from "@/components/general/loading";
 import { ButtonAnimated } from "@/components/animated/button-animated";
+import { useDatabase } from "@/hooks/use-database";
+import { db } from "@/lib/db";
+import { Footer } from "@/components/general/footer";
 
 export default function RSVP() {
   const navigate = useNavigate();
   const [numGoing, setNumGoing] = useState<number>(0);
   const [error, setError] = useState<null | string>(null);
+  const { useQuery, useMutation } = useDatabase();
   const params = useParams();
 
-  const { data, isLoading } = db.useQuery({
+  const { data, isLoading } = useQuery({
     invited: {
       $: {
         where: {
@@ -32,50 +35,34 @@ export default function RSVP() {
   });
 
   useEffect(() => {
-    const invitedData = data?.invited as Array<{
-      id: string;
-      max_num_of_attendees: number;
-      name: string;
-      num_of_attendees?: number;
-      prefix: string;
-      role: string;
-    }>;
+    const invitedData = data?.invited?.[0];
     if (
-      invitedData?.[0]?.num_of_attendees !== null &&
-      invitedData?.[0]?.num_of_attendees !== undefined
+      invitedData?.num_of_attendees !== null &&
+      invitedData?.num_of_attendees !== undefined
     ) {
-      setNumGoing(invitedData[0].num_of_attendees);
+      setNumGoing(invitedData.num_of_attendees);
     }
   }, [data]);
 
-  if (isLoading) {
+  if (isLoading || !data?.invited) {
     return <Loading />;
   }
 
-  const userData = (
-    data?.invited as Array<{
-      id: string;
-      max_num_of_attendees: number;
-      name: string;
-      num_of_attendees?: number;
-      prefix: string;
-      role: string;
-    }>
-  )[0];
+  const userData = data.invited[0];
 
   const onConfirm = () => {
+    if (!params.inviteid) return;
+
     if (userData.max_num_of_attendees < numGoing) {
       setError(`Can't go more than ${userData.max_num_of_attendees}`);
       return;
     }
 
-    if (!params.inviteid) return;
-
     if (numGoing < 0) {
       setError("Can't be a negative number");
       return;
     }
-    db.transact(
+    useMutation(
       db.tx.invited[params.inviteid].update({ num_of_attendees: numGoing }),
     )
       .catch((err) => {
@@ -94,12 +81,12 @@ export default function RSVP() {
 
   return (
     <div className="flex flex-col justify-center items-center gap-8 w-full h-svh">
-      <div className="flex flex-col">
-        <div className="flex flex-col items-center text-center">
-          <p className="font-handwritten font-black text-2xl md:text-4xl">
+      <div className="flex flex-col gap-2">
+        <div className="flex flex-col items-start text-center">
+          <p className="font-italiana font-black text-2xl md:text-4xl">
             Hello,
           </p>
-          <p className="font-handwritten text-2xl md:text-4xl">
+          <p className="self-center font-italiana text-5xl md:text-6xl">
             {userData.prefix} {userData.name}
           </p>
         </div>
@@ -135,11 +122,7 @@ export default function RSVP() {
           </Button>
         </ButtonAnimated>
       </FieldSet>
-      <div className="px-8">
-        <p className="text-foreground/50 text-xs md:text-base text-center">
-          You can revisit this website if you've changed your mind.
-        </p>
-      </div>
+      <Footer />
     </div>
   );
 }

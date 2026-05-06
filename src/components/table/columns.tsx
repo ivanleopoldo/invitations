@@ -5,15 +5,7 @@ import copy from "copy-to-clipboard";
 import { toast } from "sonner";
 import { useState } from "react";
 import { URL } from "@/lib/constants";
-
-export type Invited = {
-  id: string;
-  max_num_of_attendees: number;
-  num_of_attendees: number | null;
-  name: string;
-  prefix: "Mr. & Mrs." | "Mr." | "Mrs." | "Ms.";
-  role: "guest" | "family" | "host";
-};
+import type { Invited } from "@/lib/types";
 
 export const columns: ColumnDef<Invited>[] = [
   {

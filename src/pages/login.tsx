@@ -1,5 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Field, FieldGroup, FieldLabel, FieldSet } from "@/components/ui/field";
+import {
+  Field,
+  FieldGroup,
+  FieldLabel,
+  FieldSet,
+  FieldTitle,
+} from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
 import { useAuth, useSignIn } from "@clerk/react";
@@ -71,10 +77,12 @@ export default function Login() {
   }, [isSignedIn]);
 
   return (
-    <div className="flex flex-col justify-center items-center gap-5 w-full h-svh">
-      <Names />
-      <p className="font-handwritten text-2xl sm:text-3xl md:text-4xl">Login</p>
+    <div className="flex flex-col justify-center items-center gap-12 w-full h-svh">
+      <Names className="scale-75" />
       <FieldSet className="px-4 w-full max-w-xs">
+        <FieldTitle>
+          <p className="self-start font-italiana text-2xl md:text-4xl">Login</p>
+        </FieldTitle>
         <FieldGroup>
           <Field>
             <FieldLabel htmlFor="passphrase">Passphrase</FieldLabel>
