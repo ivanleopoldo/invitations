@@ -1,18 +1,17 @@
 import { db } from "@/lib/db";
-import type {
-  InstantError,
-  InstaQLOptions,
-  TransactionChunk,
-} from "@instantdb/core";
+import type { InstaQLOptions, TransactionChunk } from "@instantdb/core";
 import type { Invited } from "@/lib/types";
 
 export function useDatabase() {
   const useQuery = (query: any, opts?: InstaQLOptions) => {
-    return db.useQuery(query as never, opts) as {
+    type QueryResult = {
       data: { invited: Invited[] } | undefined;
       isLoading: boolean;
-      error: InstantError | null;
+      error: undefined;
     };
+
+    const result = db.useQuery(query as never, opts);
+    return result as QueryResult;
   };
 
   const useMutation = (
