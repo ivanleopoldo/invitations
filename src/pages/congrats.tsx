@@ -30,13 +30,8 @@ export default function Congrats() {
     <div className="flex flex-col justify-center items-center gap-8 p-4 md:p-12 h-svh">
       <div className="max-w-full text-center">
         <p className="font-major text-xl md:text-2xl">We still do.</p>
-        <div className="text-center -rotate-12">
-          <p className="font-cursive text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
-            Hannah
-          </p>
-          <p className="font-cursive text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
-            & Leo
-          </p>
+        <div className="text-center">
+          <p className="font-cursive text-5xl md:text-7xl">Leo & Hannah</p>
         </div>
       </div>
       <p className="font-handwritten text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-center">

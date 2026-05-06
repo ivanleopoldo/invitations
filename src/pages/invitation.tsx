@@ -42,11 +42,8 @@ export default function InviteLink() {
               </p>
             </div>
             {isMobile && <img src={"/scribble.png"} />}
-            <div className="-rotate-12">
-              <p className="font-cursive text-5xl md:text-7xl">Hannah</p>
-              <p className="ml-16 md:ml-32 font-cursive text-5xl md:text-7xl">
-                & Leo
-              </p>
+            <div className="">
+              <p className="font-cursive text-5xl md:text-7xl">Leo & Hannah</p>
             </div>
             <div className="flex flex-col justify-center gap-4 px-2 font-light text-center">
               <div className="flex flex-col gap-5">

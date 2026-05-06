@@ -73,13 +73,8 @@ export default function Login() {
     <div className="flex flex-col justify-center items-center gap-5 w-full h-svh">
       <div className="gap-8 px-4 max-w-full">
         <p className="font-major text-md md:text-2xl">We still do.</p>
-        <div className="text-center -rotate-12">
-          <p className="font-cursive text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
-            Hannah
-          </p>
-          <p className="ml-8 sm:ml-16 md:ml-24 lg:ml-32 font-cursive text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
-            & Leo
-          </p>
+        <div className="text-center">
+          <p className="font-cursive text-5xl md:text-7xl">Leo & Hannah</p>
         </div>
       </div>
       <p className="font-handwritten text-2xl sm:text-3xl md:text-4xl">Login</p>
