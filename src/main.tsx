@@ -4,7 +4,7 @@ import "./index.css";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import { ClerkProvider } from "@clerk/react";
 import { Toaster } from "@/components/ui/sonner";
-import Loading from "@/components/Loading";
+import Loading from "@/components/general/loading.tsx";
 
 // Lazy load components for code splitting
 const App = lazy(() => import("./App.tsx"));

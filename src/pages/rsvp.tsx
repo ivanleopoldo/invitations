@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { motion } from "motion/react";
 import {
   Field,
   FieldError,
@@ -13,7 +12,8 @@ import { useParams } from "react-router";
 import { db } from "@/lib/db";
 import { toast } from "sonner";
 import { useNavigate } from "react-router";
-import Loading from "@/components/Loading";
+import Loading from "@/components/general/loading";
+import { ButtonAnimated } from "@/components/animated/button-animated";
 
 export default function RSVP() {
   const navigate = useNavigate();
@@ -129,11 +129,11 @@ export default function RSVP() {
             {error && <FieldError>{error}</FieldError>}
           </Field>
         </FieldGroup>
-        <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+        <ButtonAnimated>
           <Button onClick={() => onConfirm()} className="w-full">
             Confirm
           </Button>
-        </motion.div>
+        </ButtonAnimated>
       </FieldSet>
       <div className="px-8">
         <p className="text-foreground/50 text-xs md:text-base text-center">

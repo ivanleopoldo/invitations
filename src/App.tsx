@@ -1,16 +1,12 @@
 import { Button } from "./components/ui/button";
 import { useNavigate } from "react-router";
+import { Names } from "./components/general/names";
 
 export default function App() {
   const navigate = useNavigate();
   return (
     <div className="flex flex-col justify-center items-center gap-2 md:gap-4 px-4 w-full h-svh">
-      <div className="flex flex-col gap-4 max-w-full">
-        <p className="font-major text-xl md:text-2xl">We still do.</p>
-        <div className="text-center">
-          <p className="font-cursive text-5xl md:text-7xl">Leo & Hannah</p>
-        </div>
-      </div>
+      <Names />
       <p className="font-handwritten text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-center">
         Have you received an invite?
       </p>

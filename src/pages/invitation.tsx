@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/useIsMobile";
-import { motion } from "motion/react";
 import { NavLink, useParams } from "react-router";
+import { Names } from "@/components/general/names";
+import { Location } from "@/components/general/location";
+import { ButtonAnimated } from "@/components/animated/button-animated";
 
 export default function InviteLink() {
   const params = useParams();
@@ -42,9 +44,7 @@ export default function InviteLink() {
               </p>
             </div>
             {isMobile && <img src={"/scribble.png"} />}
-            <div className="">
-              <p className="font-cursive text-5xl md:text-7xl">Leo & Hannah</p>
-            </div>
+            <Names />
             <div className="flex flex-col justify-center gap-4 px-2 font-light text-center">
               <div className="flex flex-col gap-5">
                 <p className="md:text-2xl text-center">
@@ -56,16 +56,7 @@ export default function InviteLink() {
                 </p>
                 <p className="text-xl">at six o'clock in the evening at</p>
               </div>
-              <div className="flex flex-col gap-2 scale-60 md:scale-100">
-                <a
-                  href="https://maps.app.goo.gl/CuEfWZiC2ZwLL4K47"
-                  className="self-center bg-accent px-4 py-2 rounded-full w-fit"
-                >
-                  <p className="text-secondary-foreground">
-                    📍 The Glass Pavilion, Beverly View Events Pavilion
-                  </p>
-                </a>
-              </div>
+              <Location />
             </div>
             <div className="flex flex-col justify-center items-center gap-1 text-normal md:text-xl text-center">
               <p>We kindly encourage you to come in your</p>
@@ -73,13 +64,13 @@ export default function InviteLink() {
                 Formal Midnight Blue Attire.
               </p>
             </div>
-            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+            <ButtonAnimated>
               <NavLink to={`/rsvp/${params.inviteid}`}>
                 <Button className="rounded-none scale-120" size={"lg"}>
                   <p>Click Here for RSVP</p>
                 </Button>
               </NavLink>
-            </motion.div>
+            </ButtonAnimated>
           </div>
         </section>
       </div>

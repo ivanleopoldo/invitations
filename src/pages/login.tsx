@@ -6,6 +6,7 @@ import { useAuth, useSignIn } from "@clerk/react";
 import { toast } from "sonner";
 import { useNavigate } from "react-router";
 import { db } from "@/lib/db";
+import { Names } from "@/components/general/names";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -71,12 +72,7 @@ export default function Login() {
 
   return (
     <div className="flex flex-col justify-center items-center gap-5 w-full h-svh">
-      <div className="gap-8 px-4 max-w-full">
-        <p className="font-major text-md md:text-2xl">We still do.</p>
-        <div className="text-center">
-          <p className="font-cursive text-5xl md:text-7xl">Leo & Hannah</p>
-        </div>
-      </div>
+      <Names />
       <p className="font-handwritten text-2xl sm:text-3xl md:text-4xl">Login</p>
       <FieldSet className="px-4 w-full max-w-xs">
         <FieldGroup>
