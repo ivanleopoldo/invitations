@@ -9,7 +9,7 @@ export default function InviteLink() {
   const params = useParams();
   const isMobile = useIsMobile();
   return (
-    <div className="relative flex md:flex-row flex-col gap-8 w-full md:h-svh overflow-x-hidden">
+    <div className="relative flex md:flex-row flex-col gap-8 w-full md:h-svh scale-90 md:scale-100">
       {!isMobile && (
         <section className="relative flex md:flex-[1.5] h-[50vh] md:h-full">
           <img src={"/final.jpg"} className="w-full object-cover object-top" />
@@ -50,14 +50,14 @@ export default function InviteLink() {
               <p className="font-major text-xl md:text-2xl">
                 Thursday, 11th of June 2026
               </p>
-              <p className="text-xl">at six o'clock in the evening at</p>
+              <p className="text-xl">six o'clock in the evening at</p>
             </div>
             <Location />
           </div>
           <div className="flex flex-col justify-center items-center gap-1 text-normal md:text-xl text-center">
             <p>We kindly encourage you to come in your</p>
             <p className="bg-gray-200 px-2 py-1 font-light text-background">
-              Formal Midnight Blue Attire.
+              Midnight Blue Formal Attire.
             </p>
           </div>
           <ButtonAnimated>
