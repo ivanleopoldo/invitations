@@ -54,7 +54,7 @@ export default function RSVP() {
     if (!params.inviteid) return;
 
     if (userData.max_num_of_attendees < numGoing) {
-      setError(`Can't go more than ${userData.max_num_of_attendees}`);
+      setError(`Can't go more than ${userData.max_num_of_attendees} seats`);
       return;
     }
 
@@ -109,7 +109,6 @@ export default function RSVP() {
           <Field>
             <FieldLabel htmlFor="number">How many of you are going?</FieldLabel>
             <Input
-              className={"border-primary border-2"}
               id="number"
               type="number"
               value={numGoing}
@@ -119,7 +118,11 @@ export default function RSVP() {
               min={0}
               max={userData.max_num_of_attendees}
             />
-            {error && <FieldError>{error}</FieldError>}
+            {error && (
+              <FieldError className="bg-destructive px-2 py-1 text-foreground">
+                {error}
+              </FieldError>
+            )}
           </Field>
         </FieldGroup>
         <ButtonAnimated>
