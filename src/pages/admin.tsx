@@ -29,11 +29,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { id } from "@instantdb/core";
 
 export default function AdminPanel() {
   const { signOut, isSignedIn } = useAuth();
   const { useQuery } = useDatabase();
-  const { data, isLoading } = useQuery({ invited: {} });
+  const { data, isLoading } = useQuery({
+    invited: {
+      $: {
+        order: {
+          serverCreatedAt: "desc",
+        },
+      },
+    },
+  });
   const navigate = useNavigate();
 
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
@@ -42,6 +51,7 @@ export default function AdminPanel() {
     name: "",
     max_num_of_attendees: 0,
     role: "",
+    prefix: "Mr. & Mrs." as const,
   });
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [deletingInvitation, setDeletingInvitation] = useState<any>(null);
@@ -49,7 +59,8 @@ export default function AdminPanel() {
   const [newInvitation, setNewInvitation] = useState({
     name: "",
     max_num_of_attendees: 0,
-    role: "",
+    role: "guest",
+    prefix: "Mr. & Mrs." as const,
   });
 
   useEffect(() => {
@@ -66,6 +77,7 @@ export default function AdminPanel() {
         name: invitation.name,
         max_num_of_attendees: invitation.max_num_of_attendees,
         role: invitation.role,
+        prefix: invitation.prefix || "Mr. & Mrs.",
       });
       setIsEditDialogOpen(true);
     };
@@ -103,11 +115,13 @@ export default function AdminPanel() {
     if (!editingInvitation) return;
 
     try {
-      await db.transact(
-        db.tx[editingInvitation.id].update({
+      const { useMutation } = useDatabase();
+      await useMutation(
+        db.tx.invited[editingInvitation.id].update({
           name: formData.name,
           max_num_of_attendees: formData.max_num_of_attendees,
           role: formData.role,
+          prefix: formData.prefix,
         }),
       );
       setIsEditDialogOpen(false);
@@ -121,7 +135,8 @@ export default function AdminPanel() {
     if (!deletingInvitation) return;
 
     try {
-      await db.transact(db.tx[deletingInvitation.id].delete());
+      const { useMutation } = useDatabase();
+      await useMutation(db.tx.invited[deletingInvitation.id].delete());
       setIsDeleteDialogOpen(false);
       setDeletingInvitation(null);
     } catch (error) {
@@ -131,20 +146,22 @@ export default function AdminPanel() {
 
   const handleAdd = async () => {
     try {
-      const newId = crypto.randomUUID();
-      await db.transact(
-        db.tx[newId].insert({
+      const { useMutation } = useDatabase();
+      await useMutation([
+        db.tx.invited[id()].update({
           name: newInvitation.name,
           max_num_of_attendees: newInvitation.max_num_of_attendees,
           role: newInvitation.role,
+          prefix: newInvitation.prefix,
           num_of_attendees: null,
         }),
-      );
+      ]);
       setIsAddDialogOpen(false);
       setNewInvitation({
         name: "",
         max_num_of_attendees: 0,
-        role: "",
+        role: "guest",
+        prefix: "Mr. & Mrs." as const,
       });
     } catch (error) {
       console.error("Failed to add invitation:", error);
@@ -297,10 +314,10 @@ export default function AdminPanel() {
 
       {/* Edit Dialog */}
       <AlertDialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-        <AlertDialogContent size="sm">
+        <AlertDialogContent size="sm" className="bg-background text-foreground">
           <AlertDialogHeader>
             <AlertDialogTitle>Edit Invitation</AlertDialogTitle>
-            <AlertDialogDescription>
+            <AlertDialogDescription className="text-foreground/50">
               Update the details for this invitation.
             </AlertDialogDescription>
           </AlertDialogHeader>
@@ -313,6 +330,7 @@ export default function AdminPanel() {
                 value={formData.name}
                 onChange={(e) => handleInputChange("name", e.target.value)}
                 placeholder="Enter name"
+                className="placeholder:text-foreground/50"
               />
             </div>
             <div>
@@ -329,7 +347,27 @@ export default function AdminPanel() {
                   )
                 }
                 placeholder="Enter max attendees"
+                className="placeholder:text-foreground/50"
               />
+            </div>
+            <div>
+              <label className="font-medium text-foreground text-sm">
+                Prefix
+              </label>
+              <Select
+                value={formData.prefix}
+                onValueChange={(value) => handleInputChange("prefix", value)}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select prefix" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Mr. & Mrs.">Mr. & Mrs.</SelectItem>
+                  <SelectItem value="Mr.">Mr.</SelectItem>
+                  <SelectItem value="Mrs.">Mrs.</SelectItem>
+                  <SelectItem value="Ms.">Ms.</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
             <div>
               <label className="font-medium text-foreground text-sm">
@@ -364,10 +402,10 @@ export default function AdminPanel() {
         open={isDeleteDialogOpen}
         onOpenChange={setIsDeleteDialogOpen}
       >
-        <AlertDialogContent size="sm">
+        <AlertDialogContent size="sm" className="bg-background text-foreground">
           <AlertDialogHeader>
             <AlertDialogTitle>Delete Invitation</AlertDialogTitle>
-            <AlertDialogDescription>
+            <AlertDialogDescription className="text-foreground/50">
               Are you sure you want to delete the invitation for "
               {deletingInvitation?.name}"? This action cannot be undone.
             </AlertDialogDescription>
@@ -386,10 +424,10 @@ export default function AdminPanel() {
 
       {/* Add Invitation Dialog */}
       <AlertDialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
-        <AlertDialogContent size="sm">
+        <AlertDialogContent size="sm" className="bg-background text-foreground">
           <AlertDialogHeader>
             <AlertDialogTitle>Add New Invitation</AlertDialogTitle>
-            <AlertDialogDescription>
+            <AlertDialogDescription className="text-foreground/50">
               Create a new invitation for a guest.
             </AlertDialogDescription>
           </AlertDialogHeader>
@@ -404,6 +442,7 @@ export default function AdminPanel() {
                   handleNewInvitationChange("name", e.target.value)
                 }
                 placeholder="Enter name"
+                className="placeholder:text-foreground/50"
               />
             </div>
             <div>
@@ -416,11 +455,33 @@ export default function AdminPanel() {
                 onChange={(e) =>
                   handleNewInvitationChange(
                     "max_num_of_attendees",
-                    parseInt(e.target.value) || 0,
+                    parseInt(e.target.value),
                   )
                 }
                 placeholder="Enter max attendees"
+                className="placeholder:text-foreground/50"
               />
+            </div>
+            <div>
+              <label className="font-medium text-foreground text-sm">
+                Prefix
+              </label>
+              <Select
+                value={newInvitation.prefix}
+                onValueChange={(value) =>
+                  handleNewInvitationChange("prefix", value)
+                }
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select prefix" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Mr. & Mrs.">Mr. & Mrs.</SelectItem>
+                  <SelectItem value="Mr.">Mr.</SelectItem>
+                  <SelectItem value="Mrs.">Mrs.</SelectItem>
+                  <SelectItem value="Ms.">Ms.</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
             <div>
               <label className="font-medium text-foreground text-sm">
