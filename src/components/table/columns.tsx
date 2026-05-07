@@ -7,8 +7,21 @@ import { useState } from "react";
 import { URL } from "@/lib/constants";
 import type { Invited } from "@/lib/types";
 import { ButtonAnimated } from "../animated/button-animated";
+import { CircleCheck, CircleX } from "lucide-react";
 
 export const columns: ColumnDef<Invited>[] = [
+  {
+    header: " ",
+    cell: ({ row }) => (
+      <div>
+        {row.original.num_of_attendees !== null ? (
+          <CircleCheck className="w-8 h-8 text-green-600" />
+        ) : (
+          <CircleX className="w-8 h-8 text-red-600" />
+        )}
+      </div>
+    ),
+  },
   {
     header: " ",
     cell: ({ row }) => {
@@ -49,27 +62,6 @@ export const columns: ColumnDef<Invited>[] = [
         </div>
       );
     },
-  },
-  {
-    accessorKey: "role",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="hover:bg-muted/20 -ml-3 px-2 h-8 font-semibold text-foreground"
-        >
-          Role
-          <ArrowUpDown className="ml-2 w-3 h-3" />
-        </Button>
-      );
-    },
-    cell: ({ row }) => (
-      <span className="inline-flex items-center bg-primary px-2 py-1 border border-primary/20 rounded-full font-medium text-foreground text-xs">
-        {row.getValue("role")}
-      </span>
-    ),
   },
   {
     accessorKey: "name",
@@ -134,5 +126,26 @@ export const columns: ColumnDef<Invited>[] = [
 
       return <div className="flex items-center space-x-2">{value}</div>;
     },
+  },
+  {
+    accessorKey: "role",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="hover:bg-muted/20 -ml-3 px-2 h-8 font-semibold text-foreground"
+        >
+          Role
+          <ArrowUpDown className="ml-2 w-3 h-3" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => (
+      <span className="inline-flex items-center bg-primary px-2 py-1 border border-primary/20 rounded-full font-medium text-foreground text-xs">
+        {row.getValue("role")}
+      </span>
+    ),
   },
 ];
