@@ -96,7 +96,7 @@ export default function RSVP() {
             {userData.prefix} {userData.name}
           </p>
         </div>
-        <p className="text-sm md:text-xl text-center">
+        <p className="text-xl text-center">
           We have reserved{" "}
           <span className="bg-primary px-2 py-1 font-light">
             {userData.max_num_of_attendees} seats
