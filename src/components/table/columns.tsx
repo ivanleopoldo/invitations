@@ -1,5 +1,5 @@
 import type { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, CopyCheckIcon, Link } from "lucide-react";
+import { ArrowUpDown, CopyCheckIcon, Link, Edit, Trash } from "lucide-react";
 import { Button } from "../ui/button";
 import copy from "copy-to-clipboard";
 import { toast } from "sonner";
@@ -147,5 +147,66 @@ export const columns: ColumnDef<Invited>[] = [
         {row.getValue("role")}
       </span>
     ),
+  },
+  {
+    header: " ",
+    cell: ({ row }) => {
+      const handleEdit = () => {
+        // This will be handled by the parent component
+        const event = new CustomEvent("edit-invitation", {
+          detail: {
+            id: row.original.id,
+            name: row.original.name,
+            max_num_of_attendees: row.original.max_num_of_attendees,
+            role: row.original.role,
+            num_of_attendees: row.original.num_of_attendees,
+          },
+        });
+        window.dispatchEvent(event);
+      };
+
+      return (
+        <ButtonAnimated>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={handleEdit}
+            className="group hover:bg-primary/10 border-border/50 hover:border-primary/50 transition-all duration-200"
+          >
+            <Edit className="w-4 h-4" />
+            <span className="ml-2 text-xs">Edit</span>
+          </Button>
+        </ButtonAnimated>
+      );
+    },
+  },
+  {
+    header: " ",
+    cell: ({ row }) => {
+      const handleDelete = () => {
+        // This will be handled by the parent component
+        const event = new CustomEvent("delete-invitation", {
+          detail: {
+            id: row.original.id,
+            name: row.original.name,
+          },
+        });
+        window.dispatchEvent(event);
+      };
+
+      return (
+        <ButtonAnimated>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={handleDelete}
+            className="group hover:bg-destructive/10 border-border/50 hover:border-destructive/50 hover:text-destructive transition-all duration-200"
+          >
+            <Trash className="w-4 h-4" />
+            <span className="ml-2 text-xs">Delete</span>
+          </Button>
+        </ButtonAnimated>
+      );
+    },
   },
 ];
