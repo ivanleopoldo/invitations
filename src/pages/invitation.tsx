@@ -33,9 +33,13 @@ export default function InviteLink() {
           <div className="px-8 md:px-0">
             <p className="font-major md:text-xl text-center">
               In honor of celebrating{" "}
-              <span className="bg-primary px-2 py-1 font-bold text-white">
+            </p>
+            <p className="font-major md:text-xl text-center">
+              <span className="bg-primary px-2 py-1 font-bold text-white text-2xl">
                 25 years
               </span>{" "}
+            </p>
+            <p className="font-major md:text-xl text-center">
               of their marriage
             </p>
           </div>
