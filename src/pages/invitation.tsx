@@ -60,8 +60,8 @@ export default function InviteLink() {
             </div>
             <Location />
           </div>
-          <Separator className="bg-foreground/20 mx-0 px-0" />
-          <div className="flex flex-col justify-center items-center gap-6">
+          <Separator className="bg-foreground/20 mx-8 px-8" />
+          <div className="flex flex-col justify-center items-center gap-6 px-8">
             <p className="font-major text-2xl md:text-3xl text-start">Attire</p>
             <div className="gap-4 grid grid-cols-2 text-normal md:text-xl text-center">
               <div className="flex flex-col items-center gap-4">
@@ -77,6 +77,7 @@ export default function InviteLink() {
               </div>
             </div>
           </div>
+          <Separator className="bg-foreground/20 mx-8 px-8" />
           <ButtonAnimated>
             <NavLink to={`/rsvp/${params.inviteid}`}>
               <Button className="rounded-none" size={"lg"}>
