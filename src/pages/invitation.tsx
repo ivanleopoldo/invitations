@@ -61,8 +61,15 @@ export default function InviteLink() {
             <Location />
           </div>
           <Separator className="bg-foreground/20 mx-8 px-8" />
-          <div className="flex flex-col justify-center items-center gap-6 px-8">
-            <p className="font-major text-2xl md:text-3xl text-start">Attire</p>
+          <div className="flex flex-col justify-center items-center gap-2 px-8">
+            <div className="flex flex-col justify-center items-center gap-2 text-center">
+              <p className="font-major text-2xl md:text-3xl text-start">
+                Attire
+              </p>
+              <p className="bg-gray-200 px-2 py-1 font-bold text-background">
+                Midnight Blue Color
+              </p>
+            </div>
             <div className="gap-4 grid grid-cols-2 text-normal md:text-xl text-center">
               <div className="flex flex-col items-center gap-4">
                 <Venus className="bg-primary mb-1 p-2 w-10 h-10" />
