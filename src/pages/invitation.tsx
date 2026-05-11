@@ -73,7 +73,7 @@ export default function InviteLink() {
               </div>
               <div className="flex flex-col items-center gap-4">
                 <Mars className="bg-white mb-1 p-2 w-10 h-10 text-primary" />
-                <span>Polo shirt with tie for a formal touch</span>
+                <span>Long sleeves polo with tie</span>
               </div>
             </div>
           </div>
