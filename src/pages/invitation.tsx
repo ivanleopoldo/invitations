@@ -4,6 +4,8 @@ import { NavLink, useParams } from "react-router";
 import { Names } from "@/components/general/names";
 import { Location } from "@/components/general/location";
 import { ButtonAnimated } from "@/components/animated/button-animated";
+import { Mars, Venus } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 
 export default function InviteLink() {
   const params = useParams();
@@ -58,11 +60,22 @@ export default function InviteLink() {
             </div>
             <Location />
           </div>
-          <div className="flex flex-col justify-center items-center gap-1 text-normal md:text-xl text-center">
-            <p>We kindly encourage you to come in your</p>
-            <p className="bg-gray-200 px-2 py-1 font-light text-background">
-              Midnight Blue Formal Attire.
-            </p>
+          <Separator className="bg-foreground/20 mx-0 px-0" />
+          <div className="flex flex-col justify-center items-center gap-6">
+            <p className="font-major text-2xl md:text-3xl text-start">Attire</p>
+            <div className="gap-4 grid grid-cols-2 text-normal md:text-xl text-center">
+              <div className="flex flex-col items-center gap-4">
+                <Venus className="bg-primary mb-1 p-2 w-10 h-10" />
+                <span>
+                  Knee-length dresses, mid-length dresses (formal), Jumpsuits,
+                  Blouse, Slacks
+                </span>
+              </div>
+              <div className="flex flex-col items-center gap-4">
+                <Mars className="bg-white mb-1 p-2 w-10 h-10 text-primary" />
+                <span>Polo shirt with tie for a formal touch</span>
+              </div>
+            </div>
           </div>
           <ButtonAnimated>
             <NavLink to={`/rsvp/${params.inviteid}`}>
