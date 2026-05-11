@@ -65,6 +65,12 @@ export function DataTable<TData, TValue>({
           <InputGroup className="max-w-xs">
             <InputGroupInput
               placeholder="Search..."
+              value={
+                (table.getColumn("name")?.getFilterValue() as string) ?? ""
+              }
+              onChange={(e) =>
+                table.getColumn("name")?.setFilterValue(e.target.value)
+              }
               className="placeholder:text-foreground/40"
             />
             <InputGroupAddon>
@@ -176,10 +182,23 @@ export function DataTable<TData, TValue>({
               {Array.from(
                 { length: Math.min(5, table.getPageCount()) },
                 (_, i) => {
-                  const pageIndex = i;
+                  // Calculate the page range centered around current page
+                  const currentPage = table.getState().pagination.pageIndex;
+                  const totalPages = table.getPageCount();
+                  let startPage = Math.max(0, currentPage - 2);
+                  let endPage = Math.min(totalPages, startPage + 5);
+
+                  // Adjust if we're at the end
+                  if (endPage - startPage < 5 && startPage > 0) {
+                    startPage = Math.max(0, endPage - 5);
+                  }
+
+                  const pageIndex = startPage + i;
+                  if (pageIndex >= totalPages) return null;
+
                   return (
                     <Button
-                      key={pageIndex}
+                      key={`page-${pageIndex}`}
                       variant={
                         table.getState().pagination.pageIndex === pageIndex
                           ? "default"
